@@ -1,0 +1,24 @@
+﻿<div class="row">
+    <h1 class="text-center">Личный кабинет</h1>
+
+    <div class="col-md-3 text-center">
+        <ul class="list-unstyled">
+            <li>
+                <a href="#/product" class="btn btn-default">Товары и услуги</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col-md-9" >
+        <table class="table table-striped">
+            <tr>
+                <th>Имя:</th>
+                <td>{{authentication.name}}</td>
+            </tr>
+            <tr>
+                <th>Email:</th>
+                <td>{{authentication.email}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

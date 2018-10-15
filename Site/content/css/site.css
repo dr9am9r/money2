@@ -1,0 +1,142 @@
+﻿a 
+{
+    cursor: pointer;
+}
+
+body {
+    padding-top: 60px;
+}
+
+h1
+{
+    margin: 10px 0;
+    font-size: 30px;
+}
+
+h2
+{
+    margin-top: 10px;
+}
+
+form.tr
+{
+    display: table-row;
+}
+
+p.input-group
+{
+    margin: 0;
+}
+
+.alert span
+{
+    margin-right: 10px;
+}
+
+.form-control-sw
+{
+    width: 100px;
+}
+
+.main-container
+{
+    min-height: 600px;
+}
+
+.mc-message
+{
+    position: fixed; 
+    top: 70px; 
+    right: 20px;
+    opacity: 0.9;
+}
+
+input.ng-invalid.ng-dirty, select.ng-invalid.ng-dirty
+{
+  border: 1px solid red;
+}
+
+select.list 
+{
+    width: 100%;
+    overflow: auto;
+}
+
+td 
+{
+    vertical-align: middle;
+    text-align: center;
+}
+
+.table th
+{
+    text-align: center;
+}
+
+table.t-tooltip 
+{
+    margin: 5px 2px;
+}
+
+table.t-tooltip td
+{
+    padding: 3px 5px;
+    border: 1px solid #fff;
+    border-collapse: collapse;
+}
+
+td.price, th.price
+{
+    text-align: right;
+}
+
+td.price a 
+{
+    color: inherit;
+}
+
+td.price p, th.price p
+{
+    font-style: italic;
+    font-size: 12px;
+    margin: 0;
+}
+
+th.avg
+{
+    color: darkgreen;
+}
+
+th.text-left 
+{
+    text-align: left;
+}
+
+th.total
+{
+    color: #3399f3;
+}
+
+.tooltip .tooltip-inner {
+    background-color: #208ff2;
+    text-shadow: 1px 1px 1px #111;
+}
+
+.tooltip .tooltip-arrow {
+    display: none;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak { 
+  display: none; 
+} 
+
+.tab-content {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+
+.nav-tabs {
+    margin-bottom: 0;
+}

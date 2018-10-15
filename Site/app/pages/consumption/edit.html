@@ -1,0 +1,72 @@
+﻿<div class="row">
+    <div class="col-md-3">
+        <h2>Расход</h2>
+
+        <form name="consumptionForm">
+            <div class="form-group">
+                <label>Дата</label>
+                <dtpicker ng-model="consumption.Date" opened="false" />
+            </div>
+
+            <div class="form-group">
+                <label for="Place">Место</label>
+                <input name="Place" uib-typeahead="place for place in places | filter:$viewValue | limitTo:10" class="form-control" type="text" data-ng-model="consumption.Place" data-ng-required="true" autocomplete="off" />
+            </div>
+
+            <div class="form-group">
+                <a class="btn btn-primary" href="#/consumption">Назад</a>
+                <button class="btn btn-success" type="submit" data-ng-click="save(consumptionForm)">Сохранить</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-9">
+        <h2>Чек</h2>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="col-md-4">Название</th>
+                    <th class="col-md-2">Кол-во</th>
+                    <th class="col-md-2">Цена</th>
+                    <th class="col-md-2">Сумма</th>
+                    <th class="col-md-2">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="tr" data-ng-repeat="item in consumption.ConsumptionItems" ng-form="itemForm">
+                    <td style="text-align: left;">
+                        <span data-ng-hide="item.isEdit">{{ item.Name }}</span>
+                        <input type="text" uib-typeahead="name for name in names | filter:$viewValue | limitTo:10" required class="form-control" data-ng-model="item.Name" data-ng-show="item.isEdit" autocomplete="off" />
+                    </td>
+                    <td>
+                        <span data-ng-hide="item.isEdit" class="text-right">{{ item.Quantity }}</span>
+                        <input type="number" step="1" data-ng-pattern="/^[0-9]+$/" required class="form-control text-right" data-ng-model="item.Quantity" data-ng-show="item.isEdit" />
+                    </td>
+                    <td>
+                        <span data-ng-hide="item.isEdit" class="text-right">{{ item.Price.toFixed(2) }}р.</span>
+                        <input type="number" step="0.01" data-ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" required class="form-control text-right" data-ng-model="item.Price" data-ng-show="item.isEdit" />
+                    </td>
+                    <td>
+                        <span data-ng-hide="item.isEdit" class="text-right">{{ item.Sum.toFixed(2) }}р.</span>
+                    </td>
+                    <td>
+                        <button class="btn btn-xs btn-info glyphicon glyphicon-pencil" data-ng-click="editItem(item)" data-ng-hide="item.isEdit"></button>
+                        <button class="btn btn-xs btn-success glyphicon glyphicon-ok" data-ng-click="saveItem(item, itemForm)" data-ng-show="item.isEdit"></button>
+                        <button class="btn btn-xs btn-danger glyphicon glyphicon-remove" data-ng-click="deleteItem(item)"></button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th class="text-right">Итого:</th>
+                    <th colspan="2"></th>
+                    <th class="text-center">{{ total.toFixed(2) }}р.</th>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>
+
+        <button class="btn btn-info btn-sm" data-ng-click="addItem()">Добавить</button>
+    </div>
+</div>
