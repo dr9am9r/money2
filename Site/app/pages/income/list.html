@@ -5,17 +5,17 @@
         <form name="filterForm">
             <div class="form-group">
                 <label>С</label>
-                <dtpicker ng-model="filterData.StartDate" opened="false" />
+                <dtpicker ng-model="filterData.startDate" opened="false" />
             </div>
 
             <div class="form-group">
                 <label>По</label>
-                <dtpicker ng-model="filterData.EndDate" opened="false" />
+                <dtpicker ng-model="filterData.endDate" opened="false" />
             </div>
 
             <div class="form-group">
                 <label for="Type">Тип</label>
-                <select class="form-control" data-ng-model="filterData.TypeId" ng-options="item.Id as item.Name for item in types">
+                <select class="form-control" data-ng-model="filterData.typeId" ng-options="item.id as item.name for item in types">
                     <option value="0"></option>
                 </select>
             </div>
@@ -45,22 +45,22 @@
             <tbody>
                 <tr data-ng-repeat="income in incomes">
                     <td>
-                        <span data-ng-hide="income.isEdit">{{ income.Date | date:'dd MMM yyyy' }}</span>
-                        <dtpicker ng-model="income.Date" opened="false" data-ng-show="income.isEdit" />
+                        <span data-ng-hide="income.isEdit">{{ income.date | date:'dd MMM yyyy' }}</span>
+                        <dtpicker ng-model="income.date" opened="false" data-ng-show="income.isEdit" />
                     </td>
                     <td>
-                        <span data-ng-hide="income.isEdit">{{ income.Name }}</span>
-                        <input type="text" required class="form-control" data-ng-model="income.Name" data-ng-show="income.isEdit" />
+                        <span data-ng-hide="income.isEdit">{{ income.name }}</span>
+                        <input type="text" required class="form-control" data-ng-model="income.name" data-ng-show="income.isEdit" />
                     </td>
                     <td>
-                        <span data-ng-hide="income.isEdit">{{ income.TypeName }}</span>
-                        <select class="form-control" data-ng-model="income.TypeId" ng-options="item.Id as item.Name for item in types" data-ng-show="income.isEdit">
+                        <span data-ng-hide="income.isEdit">{{ income.typeName }}</span>
+                        <select class="form-control" data-ng-model="income.typeId" ng-options="item.id as item.name for item in types" data-ng-show="income.isEdit">
                             <option value="0"></option>
                         </select>
                     </td>
                     <td class="text-right">
-                        <span data-ng-hide="income.isEdit">{{ income.Sum.toFixed(2) }}р.</span>
-                        <input type="number" step="0.01" data-ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" required class="form-control text-right" data-ng-model="income.Sum" data-ng-show="income.isEdit" />
+                        <span data-ng-hide="income.isEdit">{{ income.sum.toFixed(2) }}р.</span>
+                        <input type="number" step="0.01" data-ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" required class="form-control text-right" data-ng-model="income.sum" data-ng-show="income.isEdit" />
                     </td>
                     <td>
                         <button class="btn btn-xs btn-info glyphicon glyphicon-pencil" data-ng-click="edit(income)" data-ng-hide="income.isEdit"></button>

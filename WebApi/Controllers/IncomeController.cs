@@ -27,7 +27,7 @@ namespace Money2.WebApi.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveIncome( [FromQuery]IncomeDto income )
+        public ActionResult SaveIncome( [FromBody]IncomeDto income )
         {
             if ( !ModelState.IsValid )
             {

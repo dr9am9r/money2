@@ -6,9 +6,9 @@ app.controller('incomeListController', ['$scope', '$route', 'incomeService', 'lo
     $scope.editCount = 0;
     $scope.total = 0;
     $scope.filterData = {
-        StartDate: '',
-        EndDate: '',
-        TypeId: 0
+        startDate: '',
+        endDate: '',
+        typeId: 0
     };
 
     $scope.init = function () {
@@ -23,17 +23,17 @@ app.controller('incomeListController', ['$scope', '$route', 'incomeService', 'lo
         $scope.total = 0;
 
         for (var i = 0; i < $scope.incomes.length; i++) {
-            $scope.total += $scope.incomes[i].Sum;
+            $scope.total += $scope.incomes[i].sum;
         }
     };
 
     $scope.add = function () {
         $scope.incomes.splice(0, 0, {
-            Id: 0,
-            Date: '',
-            Name: '',
-            TypeId: 0,
-            Sum: 0,
+            id: 0,
+            date: '',
+            name: '',
+            typeId: 0,
+            sum: 0,
             isEdit: true
         });
 
@@ -50,8 +50,8 @@ app.controller('incomeListController', ['$scope', '$route', 'incomeService', 'lo
             function () { return incomeService.save(income); },
             function () {
                 for (var i = 0; i < $scope.types.length; i++) {
-                    if ($scope.types[i].Id == income.TypeId) {
-                        income.TypeName = $scope.types[i].Name;
+                    if ($scope.types[i].id == income.typeId) {
+                        income.typeName = $scope.types[i].name;
                     }
                 }
 
@@ -66,12 +66,12 @@ app.controller('incomeListController', ['$scope', '$route', 'incomeService', 'lo
     $scope.delete = function (income) {
         var index = $scope.incomes.indexOf(income);
 
-        if (income.Id == 0) {
+        if (income.id == 0) {
             $scope.incomes.splice(index, 1);
             $scope.refresh();
         } else {
             if (confirm('Вы действительно хотите удалить доход?')) {
-                incomeService.delete(income.Id).then(function () {
+                incomeService.delete(income.id).then(function () {
                     $scope.incomes.splice(index, 1);
                     $scope.refresh();
                 });
@@ -89,9 +89,9 @@ app.controller('incomeListController', ['$scope', '$route', 'incomeService', 'lo
 
     $scope.clear = function () {
         $scope.filterData = {
-            StartDate: '',
-            EndDate: '',
-            TypeId: 0
+            startDate: '',
+            endDate: '',
+            typeId: 0
         };
 
         $scope.filter();

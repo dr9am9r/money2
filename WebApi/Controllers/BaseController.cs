@@ -13,7 +13,7 @@ namespace Money2.WebApi.Controllers
         {
             get
             {
-                return 0;// Int32.Parse( User.Claims.First( c => c.Type == ClaimTypes.NameIdentifier ).Value );
+                return Int32.Parse( User.Claims.First( c => c.Type == ClaimTypes.NameIdentifier ).Value );
             }
         }
     }
