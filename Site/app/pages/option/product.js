@@ -10,9 +10,9 @@ app.controller('productController', ['$scope', '$routeParams', 'productService',
 
     $scope.refresh = function () {
         $scope.products = [];
-        for (var i = 0; i < $scope.productData.Products.length; i++) {
-            if ($scope.productData.Products[i].TypeId == $scope.typeId) {
-                $scope.products.push($scope.productData.Products[i]);
+        for (var i = 0; i < $scope.productData.products.length; i++) {
+            if ($scope.productData.products[i].typeId == $scope.typeId) {
+                $scope.products.push($scope.productData.products[i]);
             }
         }
 
@@ -20,8 +20,8 @@ app.controller('productController', ['$scope', '$routeParams', 'productService',
             $scope.product = $scope.products[0];
         }
 
-        if ($scope.productData.Names.length > 0) {
-            $scope.name = $scope.productData.Names[0];
+        if ($scope.productData.names.length > 0) {
+            $scope.name = $scope.productData.names[0];
         }
     };
 
@@ -31,19 +31,19 @@ app.controller('productController', ['$scope', '$routeParams', 'productService',
         }
 
         var product = {
-            Id: 0,
-            Name: $scope.name,
-            TypeId: $scope.typeId,
-            UserId: 0
+            id: 0,
+            name: $scope.name,
+            typeId: $scope.typeId,
+            userId: 0
         };
 
         $scope.dataService.saveData(
             function () { return productService.save(product); },
             function () {
-                $scope.productData.Products.push(product);
+                $scope.productData.products.push(product);
 
-                var index = $scope.productData.Names.indexOf($scope.name);
-                $scope.productData.Names.splice(index, 1);
+                var index = $scope.productData.names.indexOf($scope.name);
+                $scope.productData.names.splice(index, 1);
 
                 $scope.refresh();
             }

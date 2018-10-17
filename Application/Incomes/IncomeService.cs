@@ -52,6 +52,8 @@ namespace Money2.Application.Incomes
             };
 
             _incomeRepository.Save( income );
+
+            dto.Id = income.Id;
         }
 
         public List<IncomeType> GetIncomeTypes()

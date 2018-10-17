@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Money2.Application.Consumptions;
 using Money2.Application.Incomes;
@@ -28,61 +25,33 @@ namespace Money2.WebApi.Controllers
         [HttpGet( "incometypes" )]
         public ActionResult GetIncomeTypes()
         {
-            try
-            {
-                var types = _incomeService.GetIncomeTypes();
+            var types = _incomeService.GetIncomeTypes();
 
-                return Ok( types );
-            }
-            catch ( Exception ex )
-            {
-                return BadRequest( ex.Message );
-            }
+            return Ok( types );
         }
 
-        [ActionName( "places" )]
+        [HttpGet( "places" )]
         public ActionResult GetPlaces()
         {
-            try
-            {
-                var places = _consumptionService.GetConsumptionPlaces( UserId );
+            var places = _consumptionService.GetConsumptionPlaces( UserId );
 
-                return Ok( places );
-            }
-            catch ( Exception ex )
-            {
-                return BadRequest( ex.Message );
-            }
+            return Ok( places );
         }
 
-        [ActionName( "productnames" )]
+        [HttpGet( "productnames" )]
         public ActionResult GetProductNames()
         {
-            try
-            {
-                var names = _productService.GetProductNames( UserId );
+            var names = _productService.GetProductNames( UserId );
 
-                return Ok( names );
-            }
-            catch ( Exception ex )
-            {
-                return BadRequest( ex.Message );
-            }
+            return Ok( names );
         }
 
-        [ActionName( "producttypes" )]
+        [HttpGet( "producttypes" )]
         public ActionResult GetProductTypes()
         {
-            try
-            {
-                var types = _productService.GetProductTypes();
+            var types = _productService.GetProductTypes();
 
-                return Ok( types );
-            }
-            catch ( Exception ex )
-            {
-                return BadRequest( ex.Message );
-            }
+            return Ok( types );
         }
     }
 }

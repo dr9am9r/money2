@@ -30,6 +30,11 @@ namespace Money2.Infrastructure
             get { return _context.Set<T>(); }
         }
 
+        protected DbSet<E> CommonSet<E>() where E : class
+        {
+            return _context.Set<E>();
+        }
+
         public Repository( Money2Context context )
         {
             _context = context;

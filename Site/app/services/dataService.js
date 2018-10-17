@@ -25,7 +25,7 @@ app.factory('dataService', ['messageCenterService', function (messageCenterServi
                 messageCenterService.add('success', 'Изменения успешно сохранены!', { timeout: 3000 });
  
                 if (successFn) {
-                    successFn();
+                    successFn(response);
                 }
             })
             .error(function (response) {

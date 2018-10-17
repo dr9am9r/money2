@@ -17,8 +17,8 @@ app.controller('loginController', ['$scope', '$location', 'authService', functio
             function (response) {
                 $location.path('/consumption');
             },
-            function (err) {
-                 $scope.message = err.error_description;
+            function (error) {
+                 $scope.message = error;
             }
         );
     };

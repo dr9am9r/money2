@@ -3,7 +3,7 @@
         <div class="col-md-5">
             <h2>Товары без типа</h2>
 
-            <select class="list" data-ng-model="name" size="20" data-ng-options="item as item for item in productData.Names" style="height: 400px;">
+            <select class="list" data-ng-model="name" size="20" data-ng-options="item as item for item in productData.names" style="height: 400px;">
             </select>
         </div>
 
@@ -19,10 +19,10 @@
         <div class="col-md-5">
             <h2>Типы</h2>
 
-            <select class="form-control" data-ng-model="typeId" ng-options="item.Id as item.Name for item in types" data-ng-change="refresh()">
+            <select class="form-control" data-ng-model="typeId" ng-options="item.id as item.name for item in types" data-ng-change="refresh()">
             </select>
 
-            <select class="list" data-ng-model="product" size="18" data-ng-options="item as item.Name for item in products" style="margin-top: 5px; height: 360px;">
+            <select class="list" data-ng-model="product" size="18" data-ng-options="item as item.name for item in products" style="margin-top: 5px; height: 360px;">
             </select>
         </div>
     </div>

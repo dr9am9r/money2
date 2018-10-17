@@ -32,11 +32,6 @@ app.config(['$routeProvider', function($routeProvider){
         templateUrl: "../app/pages/income/list.html"
     });
 
-    $routeProvider.when("/active", {
-        controller: "activeListController",
-        templateUrl: "../app/pages/active/list.html"
-    });
-
     $routeProvider.when("/consumption", {
         controller: "consumptionListController",
         templateUrl: "../app/pages/consumption/list.html"

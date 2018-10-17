@@ -48,7 +48,9 @@ app.controller('incomeListController', ['$scope', '$route', 'incomeService', 'lo
     $scope.save = function (income) {
         $scope.dataService.saveData(
             function () { return incomeService.save(income); },
-            function () {
+            function (response) {
+                console.log('response', response);
+                income.id = response;
                 for (var i = 0; i < $scope.types.length; i++) {
                     if ($scope.types[i].id == income.typeId) {
                         income.typeName = $scope.types[i].name;

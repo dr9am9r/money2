@@ -5,9 +5,9 @@ app.factory('consumptionService', ['$http', 'config', function ($http, config) {
     var consumptionServiceFactory = {};
 
     var _getConsumptions = function (filter) {
-        return $http.get(serviceBase + '?typeId=' + filter.TypeId
-                + '&startDate=' + filter.StartDate
-                + '&endDate=' + filter.EndDate)
+        return $http.get(serviceBase + '?typeId=' + filter.typeId
+                + '&startDate=' + filter.startDate
+                + '&endDate=' + filter.endDate)
             .then(function (results) {
                 return results;
             });

@@ -27,7 +27,6 @@ app.factory('authService', ['$http', '$q', 'config', 'localStorageService', func
         var deferred = $q.defer();
 
         $http.post(config.tokenUrl, data).success(function (response) {
-	    console.log('response', response);
             localStorageService.set('authorizationData', { token: response.token, email: loginData.email });
 
             _fillAuthData();
@@ -57,8 +56,8 @@ app.factory('authService', ['$http', '$q', 'config', 'localStorageService', func
 
         var authData = localStorageService.get('authorizationData');
         if (authData) {
-            $http.get(config.apiUrl + 'claims').then(function (results) {
-                _authentication.name = results.data[0].value;
+            $http.get(config.apiUrl + 'user').then(function (results) {
+                _authentication.name = results.data.name;
             });
 
             _authentication.isAuth = true;

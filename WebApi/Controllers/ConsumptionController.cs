@@ -39,7 +39,7 @@ namespace Money2.WebApi.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveConsumption( [FromQuery]ConsumptionDto consumption )
+        public ActionResult SaveConsumption( [FromBody]ConsumptionDto consumption )
         {
             if ( !ModelState.IsValid )
             {

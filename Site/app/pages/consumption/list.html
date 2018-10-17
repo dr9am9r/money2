@@ -5,17 +5,17 @@
         <form name="filterForm">
             <div class="form-group">
                 <label>С</label>
-                <dtpicker ng-model="filterData.StartDate" opened="false" />
+                <dtpicker ng-model="filterData.startDate" opened="false" />
             </div>
 
             <div class="form-group">
                 <label>По</label>
-                <dtpicker ng-model="filterData.EndDate" opened="false" />
+                <dtpicker ng-model="filterData.endDate" opened="false" />
             </div>
 
             <div class="form-group">
                 <label for="Type">Тип</label>
-                <select class="form-control" data-ng-model="filterData.TypeId" ng-options="item.Id as item.Name for item in types">
+                <select class="form-control" data-ng-model="filterData.typeId" ng-options="item.id as item.name for item in types">
                     <option value="0"></option>
                 </select>
             </div>

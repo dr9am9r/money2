@@ -19,39 +19,22 @@ namespace Money2.Infrastructure
             if ( endDate != null ) query = query.Where( i => i.Date <= endDate.Value );
 
             return query
-                .OrderBy( i => i.Date )
+                .OrderByDescending( i => i.Date )
                 .ToList();
         }
 
         public List<IncomeReport> GetIncomeReport(Int32 userId)
         {
-            return null;
-
-            //var result = new List<IncomeReport>();
-
-            //var cmd = Connection.CreateCommand();
-            //cmd.CommandText = @"SELECT Name, YEAR(Date) as Year, MONTH(Date) as Month, SUM(Sum) as Sum
-            //                    FROM Incomes
-            //                    WHERE UserId = @userId
-            //                    GROUP BY Name, YEAR(Date), MONTH(Date)";
-            //cmd.Parameters.Add("@userId", MySqlDbType.Int32).Value = userId;
-
-            //using (var reader = cmd.ExecuteReader())
-            //{
-            //    while (reader.Read())
-            //    {
-            //        var report = new IncomeReport()
-            //        {
-            //            Date = new DateTime(Convert.ToInt32(reader["Year"]), Convert.ToInt32(reader["Month"]), 1),
-            //            Name = Convert.ToString(reader["Name"]),
-            //            Sum = Convert.ToDecimal(reader["Sum"])
-            //        };
-
-            //        result.Add(report);
-            //    }
-            //}
-
-            //return result;
+            return Query
+                .Where( i => i.UserId == userId )
+                .GroupBy( i => new { i.Name, i.Date.Year, i.Date.Month } )
+                .Select( i => new IncomeReport()
+                    {
+                        Date = new DateTime( i.Key.Year, i.Key.Month, 1 ),
+                        Name = i.Key.Name,
+                        Sum = i.Sum( s => s.Sum )
+                    } )
+                .ToList();
         }
 
         public List<IncomeType> GetIncomeTypes()
@@ -63,30 +46,11 @@ namespace Money2.Infrastructure
 
         public Dictionary<IncomeType, Decimal> GetIncomeTypeStats( Int32 userId )
         {
-            return null;
-
-            //var result = new Dictionary<IncomeType, Decimal>();
-
-            //using ( var cmd = Connection.CreateCommand() )
-            //{
-            //    cmd.CommandText = @"SELECT it.Id, it.Name, Sum(i.Sum) As Sum FROM Incomes i
-            //                    JOIN IncomeTypes it ON i.TypeId = it.Id
-            //                    WHERE i.UserId = @userId
-            //                    GROUP BY it.Id, it.Name";
-            //    cmd.Parameters.Add( "@userId", MySqlDbType.Int32 ).Value = userId;
-
-            //    using ( var reader = cmd.ExecuteReader() )
-            //    {
-            //        while ( reader.Read() )
-            //        {
-            //            var type = FetchType( reader );
-
-            //            result.Add( type, Convert.ToDecimal( reader[ "Sum" ] ) );
-            //        }
-            //    }
-            //}
-
-            //return result;
+            return Query
+                .Where( i => i.UserId == userId )
+                .GroupBy( i => i.TypeId )
+                .Join( CommonSet<IncomeType>(), i => i.Key, it => it.Id, (i, it) => new { IncomeType = it, Incomes = i } )
+                .ToDictionary( i => i.IncomeType, i => i.Incomes.Sum( s => s.Sum ) );
         }
     }
 }
