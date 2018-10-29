@@ -8,6 +8,8 @@ namespace Money2.Domain.Consumptions
     /// </summary>
     public interface IConsumptionRepository
     {
+        void Clear( Int32 consumptionId );
+
         void Delete( Consumption consumption );
 
         Consumption Get( Int32 id );

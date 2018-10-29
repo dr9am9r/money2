@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Money2.Domain.Consumptions;
 
 namespace Money2.Infrastructure
@@ -44,6 +45,7 @@ namespace Money2.Infrastructure
         public List<Consumption> GetConsumptions( Int32 userId, DateTime? startDate, DateTime? endDate )
         {
             var query = Query
+                .Include( c => c.ConsumptionItems )
                 .Where( c => c.UserId == userId );
             
             if( startDate != null )
@@ -91,6 +93,15 @@ namespace Money2.Infrastructure
             //}
 
             //return result;
+        }
+
+        public void Clear( Int32 consumptionId )
+        {
+            var items = CommonSet<ConsumptionItem>().Where( ci => ci.ConsumptionId == consumptionId );
+
+            CommonSet<ConsumptionItem>().RemoveRange( items );
+
+            SaveChanges();
         }
     }
 }

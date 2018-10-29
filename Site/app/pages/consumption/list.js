@@ -6,21 +6,22 @@ app.controller('consumptionListController', ['$scope', '$location', '$sce', 'con
     $scope.editCount = 0;
     $scope.total = 0;
     $scope.filterData = {
-        StartDate: '',
-        EndDate: '',
-        TypeId: 0
+        startDate: '',
+        endDate: '',
+        typeId: 0
     };
 
     $scope.init = function () {
         productService.getProductTypes().then(function (result) {
             $scope.types = result.data;
+            $scope.types.unshift( { id: 0, name: 'Все' } );
 
             var filter = localStorageService.get('ConsumptionFilter');
             if (filter) {
                 $scope.filterData = filter;
             }
 
-            if ($scope.filterData.StartDate === '' && $scope.filterData.EndDate === '' && $scope.filterData.TypeId == 0)
+            if ($scope.filterData.startDate === '' && $scope.filterData.endDate === '' && $scope.filterData.typeId == 0)
             {
                 var today = new Date();
                 var mm = today.getMonth() + 1;
@@ -32,19 +33,19 @@ app.controller('consumptionListController', ['$scope', '$location', '$sce', 'con
 
                 today = yyyy + '-' + mm + '-01';
 
-                $scope.filterData.StartDate = today;
+                $scope.filterData.startDate = today;
             }
 
             if ($location.search().startDate) {
-                $scope.filterData.StartDate = $location.search().startDate;
+                $scope.filterData.startDate = $location.search().startDate;
             }
 
             if ($location.search().endDate) {
-                $scope.filterData.EndDate = $location.search().endDate;
+                $scope.filterData.endDate = $location.search().endDate;
             }
             
             if ($location.search().typeId) {
-                $scope.filterData.TypeId = parseInt($location.search().typeId);
+                $scope.filterData.typeId = parseInt($location.search().typeId);
             }
 
             $scope.filter();
@@ -55,15 +56,15 @@ app.controller('consumptionListController', ['$scope', '$location', '$sce', 'con
         $scope.total = 0;
 
         for (var i = 0; i < $scope.consumptions.length; i++) {
-            $scope.total += $scope.consumptions[i].Sum;
+            $scope.total += $scope.consumptions[i].sum;
 
-            $scope.consumptions[i].Tooltip = $scope.getTooltip($scope.consumptions[i]);
+            $scope.consumptions[i].tooltip = $scope.getTooltip($scope.consumptions[i]);
         }
     };
 
     $scope.delete = function (consumption) {
         if (confirm('Вы действительно хотите удалить доход?')) {
-            consumptionService.delete(consumption.Id).then(function () {
+            consumptionService.delete(consumption.id).then(function () {
                 var index = $scope.consumptions.indexOf(consumption);
                 $scope.consumptions.splice(index, 1);
                 $scope.refresh();
@@ -84,9 +85,9 @@ app.controller('consumptionListController', ['$scope', '$location', '$sce', 'con
 
     $scope.clear = function () {
         $scope.filterData = {
-            StartDate: '',
-            EndDate: '',
-            TypeId: 0
+            startDate: '',
+            endDate: '',
+            typeId: 0
         };
 
         var today = new Date();
@@ -99,17 +100,17 @@ app.controller('consumptionListController', ['$scope', '$location', '$sce', 'con
 
         today = yyyy + '-' + mm + '-01';
 
-        $scope.filterData.StartDate = today;
+        $scope.filterData.startDate = today;
 
         $scope.filter();
     };
 
     $scope.getTooltip = function (consumption) {
         var html = '<table class="t-tooltip">';
-        for (var i = 0; i < consumption.ConsumptionItems.length; i++) {
+        for (var i = 0; i < consumption.consumptionItems.length; i++) {
             html += '<tr>';
-            html += '<td style="text-align: left;">' + consumption.ConsumptionItems[i].Name + '</td>';
-            html += '<td class="price">' + (consumption.ConsumptionItems[i].Quantity * consumption.ConsumptionItems[i].Price).toFixed(2) + 'р.</td>';
+            html += '<td style="text-align: left;">' + consumption.consumptionItems[i].name + '</td>';
+            html += '<td class="price">' + (consumption.consumptionItems[i].quantity * consumption.consumptionItems[i].price).toFixed(2) + 'р.</td>';
             html += '</tr>';
         }
         html += '</table>';

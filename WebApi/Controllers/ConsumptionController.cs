@@ -19,14 +19,14 @@ namespace Money2.WebApi.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetConsumptions( [FromQuery]DateTime? startDate = null, [FromQuery]DateTime? endDate = null, [FromQuery]Int32 typeId = 0 )
+        public ActionResult GetConsumptions( DateTime? startDate = null, DateTime? endDate = null, Int32 typeId = 0 )
         {
             List<ConsumptionDto> consumptions = _consumptionService.GetConsumptions( UserId, startDate, endDate, typeId );
 
             return Ok( consumptions );
         }
 
-        [HttpGet]
+        [HttpGet( "{id}" )]
         public ActionResult GetConsumption( Int32 id )
         {
             var consumption = _consumptionService.GetConsumption( UserId, id );
@@ -53,8 +53,8 @@ namespace Money2.WebApi.Controllers
             return Ok( consumption.Id );
         }
 
-        [HttpDelete]
-        public ActionResult DeleteConsumption( [FromQuery]Int32 id )
+        [HttpDelete( "{id}" )]
+        public ActionResult DeleteConsumption( Int32 id )
         {
             _consumptionService.DeleteConsumption( UserId, id );
 

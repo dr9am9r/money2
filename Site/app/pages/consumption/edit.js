@@ -10,12 +10,12 @@ app.controller('consumptionEditController', ['$scope', '$q', '$routeParams', '$l
     };
 
     $scope.addItem = function () {
-        $scope.consumption.ConsumptionItems.push({
-            Id: 0,
-            Name: '',
-            Quantity: 1,
-            Price: 0,
-            Sum: 0,
+        $scope.consumption.consumptionItems.push({
+            id: 0,
+            name: '',
+            quantity: 1,
+            price: 0,
+            sum: 0,
             isEdit: true
         });
 
@@ -32,7 +32,7 @@ app.controller('consumptionEditController', ['$scope', '$q', '$routeParams', '$l
             return;
         }
 
-        item.Sum = item.Quantity * item.Price;
+        item.sum = item.quantity * item.price;
 
         item.isEdit = false;
         $scope.editCount--;
@@ -45,12 +45,13 @@ app.controller('consumptionEditController', ['$scope', '$q', '$routeParams', '$l
             $scope.editCount--;
         }
 
-        var index = $scope.consumption.ConsumptionItems.indexOf(item);
-        $scope.consumption.ConsumptionItems.splice(index, 1);
+        var index = $scope.consumption.consumptionItems.indexOf(item);
+        $scope.consumption.consumptionItems.splice(index, 1);
     };
 
     $scope.save = function (form) {
         if (!$scope.dataService.validateForm(form)) {
+            console.log('invalid form');
             return;
         }
 
@@ -72,21 +73,21 @@ app.controller('consumptionEditController', ['$scope', '$q', '$routeParams', '$l
     $scope.refresh = function () {
         $scope.total = 0;
 
-        for (var i = 0; i < $scope.consumption.ConsumptionItems.length; i++) {
-            $scope.consumption.ConsumptionItems[i].Sum = $scope.consumption.ConsumptionItems[i].Quantity * $scope.consumption.ConsumptionItems[i].Price;
+        for (var i = 0; i < $scope.consumption.consumptionItems.length; i++) {
+            $scope.consumption.consumptionItems[i].sum = $scope.consumption.consumptionItems[i].quantity * $scope.consumption.consumptionItems[i].price;
 
-            $scope.total += parseFloat($scope.consumption.ConsumptionItems[i].Sum);
+            $scope.total += parseFloat($scope.consumption.consumptionItems[i].sum);
         }
     };
 
     if ($scope.isNew()) {
         $scope.consumption = {
-            Id: 0,
-            Date: '',
-            Place: '',
-            Sum: 0,
-            UserId: 0,
-            ConsumptionItems: []
+            id: 0,
+            date: '',
+            place: '',
+            sum: 0,
+            userId: 0,
+            consumptionItems: []
         };
 
         $scope.addItem();      

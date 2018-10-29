@@ -14,9 +14,8 @@
             </div>
 
             <div class="form-group">
-                <label for="Type">Тип</label>
+                <label>Тип</label>
                 <select class="form-control" data-ng-model="filterData.typeId" ng-options="item.id as item.name for item in types">
-                    <option value="0"></option>
                 </select>
             </div>
 
@@ -42,18 +41,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr data-ng-repeat="consumption in consumptions" uib-tooltip-html="consumption.Tooltip" tooltip-placement="bottom-left">
+                <tr data-ng-repeat="consumption in consumptions" uib-tooltip-html="consumption.tooltip" tooltip-placement="bottom-left">
                     <td>
-                        <span>{{ consumption.Date | date:'dd MMM yyyy' }}</span>
+                        <span>{{ consumption.date | date:'dd MMM yyyy' }}</span>
                     </td>
                     <td class="text-left">
-                        <span>{{ consumption.Place }}</span>
+                        <span>{{ consumption.place }}</span>
                     </td>
                     <td class="price">
-                        <span>{{ consumption.Sum.toFixed(2) }}р.</span>
+                        <span>{{ consumption.sum.toFixed(2) }}р.</span>
                     </td>
                     <td>
-                        <a class="btn btn-xs btn-info glyphicon glyphicon-pencil" href="#/consumption/{{consumption.Id}}"></a>
+                        <a class="btn btn-xs btn-info glyphicon glyphicon-pencil" href="#/consumption/{{consumption.id}}"></a>
                         <button class="btn btn-xs btn-danger glyphicon glyphicon-remove" data-ng-click="delete(consumption)"></button>
                     </td>
                 </tr>

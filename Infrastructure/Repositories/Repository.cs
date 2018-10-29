@@ -43,6 +43,8 @@ namespace Money2.Infrastructure
         public void Delete( T t )
         {
             _context.Set<T>().Remove( t );
+
+            SaveChanges();
         }
 
         public T Get( Int32 id )
