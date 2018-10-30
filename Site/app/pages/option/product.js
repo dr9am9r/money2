@@ -51,15 +51,15 @@ app.controller('productController', ['$scope', '$routeParams', 'productService',
     };
 
     $scope.delete = function () {
-        if ($scope.product.Id == undefined || $scope.product.Id == 0) {
+        if ($scope.product.id == undefined || $scope.product.id == 0) {
             return;
         }
 
-        productService.delete($scope.product.Id).then(function () {
-            $scope.productData.Names.push($scope.product.Name);
+        productService.delete($scope.product.id).then(function () {
+            $scope.productData.names.push($scope.product.name);
 
-            var index = $scope.productData.Products.indexOf($scope.product);
-            $scope.productData.Products.splice(index, 1);
+            var index = $scope.productData.products.indexOf($scope.product);
+            $scope.productData.products.splice(index, 1);
 
             $scope.refresh();
         });
@@ -69,12 +69,12 @@ app.controller('productController', ['$scope', '$routeParams', 'productService',
         $scope.types = results.data;
 
         if ($scope.types.length > 0) {
-            $scope.typeId = $scope.types[0].Id;
+            $scope.typeId = $scope.types[0].id;
         }
 
         productService.getProducts().then(function (results) {
             $scope.productData = results.data;
-            $scope.products = $scope.productData.Products;
+            $scope.products = $scope.productData.products;
 
             $scope.refresh();
         });

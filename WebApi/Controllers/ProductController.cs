@@ -39,7 +39,7 @@ namespace Money2.WebApi.Controllers
             return Ok( result );
         }
 
-        [HttpDelete]
+        [HttpDelete( "{id}" )]
         public ActionResult DeleteProduct( Int32 id )
         {
             _productService.DeleteProduct( UserId, id );

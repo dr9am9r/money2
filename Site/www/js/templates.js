@@ -47,5 +47,5 @@ angular.module("../app/pages/user/register.html", []).run(["$templateCache", fun
 
 angular.module("../app/directives/dtpicker.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("../app/directives/dtpicker.html",
-    "<p class=\"input-group\"><input type=\"text\" class=\"form-control\" uib-datepicker-popup=\"yyyy-MM-dd\" data-ng-model=\"ngModel\" data-is-open=\"opened\" datepicker-local-date data-close-text=\"Закрыть\" data-current-text=\"Сегодня\" data-clear-text=\"Очистить\" data-ng-click=\"open($event)\"/> <span class=\"input-group-btn\"><button class=\"btn btn-default\" data-ng-click=\"open($event)\"><i class=\"glyphicon glyphicon-calendar\"></i></button></span></p>");
+    "<p class=\"input-group\"><input type=\"text\" class=\"form-control\" uib-datepicker-popup=\"yyyy-MM-dd\" data-ng-model=\"ngModel\" data-is-open=\"opened\" data-close-text=\"Закрыть\" data-current-text=\"Сегодня\" data-clear-text=\"Очистить\" data-ng-click=\"open($event)\"/> <span class=\"input-group-btn\"><button class=\"btn btn-default\" data-ng-click=\"open($event)\"><i class=\"glyphicon glyphicon-calendar\"></i></button></span></p>");
 }]);

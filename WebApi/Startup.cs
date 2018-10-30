@@ -24,7 +24,11 @@ namespace Money2.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices( IServiceCollection services )
         {
-            services.AddMvc().SetCompatibilityVersion( CompatibilityVersion.Version_2_1 );
+            services.AddMvc()
+                .AddJsonOptions( opt => {
+                    opt.SerializerSettings.DateFormatString = "yyyy-MM-dd";
+                } )
+                .SetCompatibilityVersion( CompatibilityVersion.Version_2_1 );
             services.AddCors();
 
             services.AddDbContext<Money2Context>( options => options.UseMySql( Configuration.GetConnectionString( "Money2Database" ) ) );

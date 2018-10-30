@@ -29,7 +29,7 @@ namespace Money2.WebApi.Controllers
         [HttpGet( "{id}" )]
         public ActionResult GetConsumption( Int32 id )
         {
-            var consumption = _consumptionService.GetConsumption( UserId, id );
+            ConsumptionDto consumption = _consumptionService.GetConsumption( UserId, id );
             if ( consumption == null )
             {
                 return NotFound();

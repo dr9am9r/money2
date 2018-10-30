@@ -58,7 +58,7 @@ namespace Money2.Application.Products
         public void DeleteProduct( int userId, int productId )
         {
             var income = _productRepository.Get( productId );
-            if ( income != null || income.UserId == userId )
+            if ( income != null && income.UserId == userId )
             {
                 _productRepository.Delete( income );
             }
